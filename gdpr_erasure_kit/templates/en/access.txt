@@ -1,0 +1,43 @@
+Subject: Subject access request (GDPR Article 15)
+
+To: ${service_name}, data protection contact
+Date: ${date}
+
+I am making a subject access request under Article 15 of the General Data
+Protection Regulation (EU) 2016/679 (GDPR).
+
+Details that identify me in your systems:
+${identifiers}
+
+Please confirm whether you process personal data about me. If you do, please
+send me:
+
+1. A copy of my personal data (Article 15(3)). As I am sending this request
+   electronically, please provide it in a commonly used electronic form.
+2. The purposes of the processing.
+3. The categories of personal data concerned.
+4. The recipients or categories of recipients to whom the data has been or
+   will be disclosed, in particular recipients in third countries or
+   international organisations, and the safeguards used for such transfers
+   (Article 15(2)).
+5. How long the data will be stored, or the criteria used to decide that.
+6. If you did not collect the data from me, any available information about
+   its source.
+7. Whether you use automated decision-making, including profiling, as
+   described in Article 22. If you do, meaningful information about the
+   logic involved and the significance and envisaged consequences for me.
+
+The first copy is free of charge (Article 15(3)).
+
+Article 12(3) requires you to reply without undue delay and in any event
+within one month of receiving this request. If this message reaches you
+today, the deadline is ${deadline}. If you need an extension, tell me within
+that month and explain why.
+
+If you need to confirm my identity, ask only for the information necessary
+for that purpose (Article 12(6)). I do not expect to send a copy of an
+identity document if you can verify me in another way, for example through
+the email address registered to my account.
+
+Kind regards,
+${full_name}

@@ -1,0 +1,46 @@
+Aihe: Tietopyyntö eli pyyntö saada pääsy henkilötietoihini (tietosuoja-asetuksen 15 artikla)
+
+Vastaanottaja: ${service_name}, tietosuoja-asioiden yhteyshenkilö
+Päivämäärä: ${date}
+
+Pyydän saada pääsyn minua koskeviin henkilötietoihin EU:n yleisen
+tietosuoja-asetuksen (EU) 2016/679 15 artiklan nojalla.
+
+Tiedot, joilla minut tunnistaa järjestelmistänne:
+${identifiers}
+
+Vahvistakaa, käsittelettekö minua koskevia henkilötietoja. Jos käsittelette,
+toimittakaa minulle
+
+1. jäljennös henkilötiedoistani (15 artiklan 3 kohta). Koska lähetän tämän
+   pyynnön sähköisesti, toimittakaa tiedot yleisesti käytetyssä sähköisessä
+   muodossa.
+2. käsittelyn tarkoitukset.
+3. kyseessä olevat henkilötietoryhmät.
+4. vastaanottajat tai vastaanottajaryhmät, joille tietoja on luovutettu tai
+   luovutetaan, erityisesti EU:n ulkopuoliset vastaanottajat ja
+   kansainväliset järjestöt, sekä siirroissa käytetyt suojatoimet
+   (15 artiklan 2 kohta).
+5. tietojen säilytysaika tai sen määrittämisperusteet.
+6. kaikki saatavilla olevat tiedot tietojen lähteestä, jos ette ole
+   keränneet niitä minulta.
+7. tieto siitä, käytättekö 22 artiklassa tarkoitettua automaattista
+   päätöksentekoa, profilointi mukaan lukien. Jos käytätte, kertokaa
+   merkitykselliset tiedot käsittelyn logiikasta sekä sen merkityksestä ja
+   todennäköisistä seurauksista minulle.
+
+Ensimmäinen jäljennös on maksuton (15 artiklan 3 kohta).
+
+Asetuksen 12 artiklan 3 kohdan mukaan teidän on vastattava ilman
+aiheetonta viivytystä ja viimeistään kuukauden kuluessa pyynnön
+vastaanottamisesta. Jos saatte tämän viestin tänään, määräaika päättyy
+${deadline}. Jos tarvitsette lisäaikaa, kertokaa siitä ja sen syistä tämän
+kuukauden kuluessa.
+
+Jos teidän on varmistettava henkilöllisyyteni, pyytäkää vain siihen
+tarvittavat tiedot (12 artiklan 6 kohta). En oleta lähettäväni kopiota
+henkilöllisyystodistuksesta, jos voitte tunnistaa minut muuten, esimerkiksi
+käyttäjätiliini liitetyn sähköpostiosoitteen avulla.
+
+Ystävällisin terveisin
+${full_name}

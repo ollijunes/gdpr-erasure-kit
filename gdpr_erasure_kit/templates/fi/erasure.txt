@@ -1,0 +1,46 @@
+Aihe: Pyyntö henkilötietojeni poistamisesta (tietosuoja-asetuksen 17 artikla)
+
+Vastaanottaja: ${service_name}, tietosuoja-asioiden yhteyshenkilö
+Päivämäärä: ${date}
+
+Pyydän teitä poistamaan kaikki minua koskevat henkilötiedot EU:n yleisen
+tietosuoja-asetuksen (EU) 2016/679 17 artiklan nojalla.
+
+Tiedot, joilla minut tunnistaa järjestelmistänne:
+${identifiers}
+
+Pyydän teitä
+
+1. poistamaan henkilötietoni ilman aiheetonta viivytystä. Perusteena on
+   17 artiklan 1 kohta, erityisesti sen a ja b alakohta: tiedot eivät ole
+   enää tarpeen niihin tarkoituksiin, joita varten ne kerättiin, ja peruutan
+   kaikki antamani suostumukset (7 artiklan 3 kohta).
+2. lopettamaan oikeutettuun etuun perustuvan käsittelyn. Vastustan sitä
+   21 artiklan 1 kohdan nojalla. Vastustan myös suoramarkkinointia
+   21 artiklan 2 kohdan nojalla.
+3. sulkemaan käyttäjätilini, jos minulla on sellainen, ja lopettamaan kaiken
+   minuun kohdistuvan markkinoinnin.
+4. ilmoittamaan poistosta kaikille, joille olette luovuttaneet tietojani, ja
+   kertomaan minulle, keitä he ovat (19 artikla).
+5. ryhtymään kohtuullisiin toimiin ilmoittaaksenne muille
+   rekisterinpitäjille poistopyynnöstäni, jos olette julkistaneet tietojani
+   (17 artiklan 2 kohta).
+6. kertomaan, mitkä tiedot säilytätte, millä oikeusperusteella ja kuinka
+   kauan, jos säilytätte tietoja 17 artiklan 3 kohdan poikkeuksen nojalla,
+   esimerkiksi lakisääteisen säilytysvelvollisuuden vuoksi.
+
+Asetuksen 12 artiklan 3 kohdan mukaan teidän on vastattava ilman
+aiheetonta viivytystä ja viimeistään kuukauden kuluessa pyynnön
+vastaanottamisesta. Jos saatte tämän viestin tänään, määräaika päättyy
+${deadline}. Jos tarvitsette lisäaikaa, kertokaa siitä ja sen syistä tämän
+kuukauden kuluessa.
+
+Jos teidän on varmistettava henkilöllisyyteni, pyytäkää vain siihen
+tarvittavat tiedot (12 artiklan 6 kohta). En oleta lähettäväni kopiota
+henkilöllisyystodistuksesta, jos voitte tunnistaa minut muuten, esimerkiksi
+käyttäjätiliini liitetyn sähköpostiosoitteen avulla.
+
+Vahvistakaa kirjallisesti, kun tiedot on poistettu.
+
+Ystävällisin terveisin
+${full_name}

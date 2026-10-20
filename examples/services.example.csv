@@ -1,0 +1,6 @@
+service,contact,account_identifier,request_type,language,notes
+Cloud Pebble,privacy@example.com,alex@example.com,,,Example account
+Paper Lantern,https://example.org/privacy/request,,,,
+Blue Acorn,data@example.net,,,fi,
+Copper Meadow,https://example.com/privacy,alex-example,access,,
+Quiet Comet,privacy@example.org,,,,

@@ -1,0 +1,43 @@
+Subject: Request to erase my personal data (GDPR Article 17)
+
+To: ${service_name}, data protection contact
+Date: ${date}
+
+I ask you to erase all personal data you hold about me under Article 17 of
+the General Data Protection Regulation (EU) 2016/679 (GDPR).
+
+Details that identify me in your systems:
+${identifiers}
+
+Please do the following:
+
+1. Erase my personal data without undue delay. I rely on Article 17(1), in
+   particular points (a) and (b): the data is no longer necessary for the
+   purposes for which you collected it, and I withdraw any consent I have
+   given (Article 7(3)).
+2. Where you process my data on the basis of legitimate interests, I object
+   to that processing under Article 21(1). I also object to direct marketing
+   under Article 21(2).
+3. Close my account, if I have one, and stop all marketing to me.
+4. Tell every recipient to whom you have disclosed my data about this
+   erasure, and tell me who those recipients are (Article 19).
+5. If you have made my data public, take reasonable steps to tell other
+   controllers that I have asked for erasure (Article 17(2)).
+6. If you keep any data under an exception in Article 17(3), for example a
+   legal duty to retain records, tell me which data you keep, on which legal
+   basis and for how long.
+
+Article 12(3) requires you to reply without undue delay and in any event
+within one month of receiving this request. If this message reaches you
+today, the deadline is ${deadline}. If you need an extension, tell me within
+that month and explain why.
+
+If you need to confirm my identity, ask only for the information necessary
+for that purpose (Article 12(6)). I do not expect to send a copy of an
+identity document if you can verify me in another way, for example through
+the email address registered to my account.
+
+Please confirm in writing when the erasure is complete.
+
+Kind regards,
+${full_name}

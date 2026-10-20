@@ -1,0 +1,5 @@
+full_name = "Alex Example"
+email = "alex@example.com"
+postal_address = """Example Street 1
+Example City"""
+other_identifiers = ["customer number 12345"]

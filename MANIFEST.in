@@ -1,0 +1,4 @@
+recursive-include tests *.py
+include scripts/check_public_tree.py
+recursive-include examples *.example.*
+include tracker/tracker-template.csv

@@ -19,3 +19,6 @@ drafts/
 out/
 tracker.csv
 services.csv
+.uv-cache/
+*.egg-info/
+build/
