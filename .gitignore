@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.venv/
+.ruff_cache/
+.pytest_cache/
+.coverage*
+htmlcov/
+dist/
+.DS_Store
+.env
+.env.*
+*.key
+*.pem
+# Private working files: your identity, real service lists, drafts and trackers.
+identity.toml
+*.private.*
+*-private/
+drafts/
+out/
+tracker.csv
+services.csv
