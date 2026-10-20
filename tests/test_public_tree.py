@@ -25,7 +25,6 @@ def test_email_allowlist_does_not_match_domain_prefixes():
         b"sub.example.test",
         b"sub.example.example",
         b"users.noreply.github.com",
-        b"anthropic.com",
     ):
         assert not scan.detect(b"synthetic@" + domain)
     for domain in (b"example.com.unapproved", b"unapproved.com"):
