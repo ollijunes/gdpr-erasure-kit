@@ -6,7 +6,14 @@ from datetime import date
 from pathlib import Path
 
 from .dates import DateRangeError, deadline, parse_date
-from .io import InputError, exclusive_file, prepare_output, read_identity, read_services
+from .io import (
+    InputError,
+    exclusive_file,
+    format_path,
+    prepare_output,
+    read_identity,
+    read_services,
+)
 from .render import render_request, slug
 from .tracker import draft_row, due_actions, write_tracker
 
@@ -76,7 +83,9 @@ def draft(args: argparse.Namespace) -> None:
     except OSError as exc:
         raise InputError(path, 1, "Cannot write output file.") from exc
     status = "marked sent" if args.mark_sent else "left as draft (not marked sent)"
-    print(f"Created {len(documents)} drafts and 1 tracker in {str(args.out)!r}. Rows {status}.")
+    print(
+        f"Created {len(documents)} drafts and 1 tracker in {format_path(args.out)}. Rows {status}."
+    )
 
 
 def main(argv: list[str] | None = None) -> int:

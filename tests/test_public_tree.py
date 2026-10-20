@@ -5,6 +5,17 @@ def test_scanner_canaries():
     scan.self_test()
 
 
+def test_github_merge_committer_email_exception_is_exact():
+    assert not scan.detect(b"GitHub <noreply@github.com>")
+    for local, domain in (
+        (b"someone", b"github.com"),
+        (b"other-noreply", b"github.com"),
+        (b"noreply", b"github.com.unapproved"),
+        (b"noreply", b"sub.github.com"),
+    ):
+        assert "non-example email address" in scan.detect(local + b"@" + domain)
+
+
 def test_email_allowlist_does_not_match_domain_prefixes():
     for domain in (
         b"example.com",

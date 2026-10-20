@@ -1,6 +1,7 @@
 import csv
 import io
 import os
+from pathlib import Path, PureWindowsPath
 from unittest.mock import patch
 
 import pytest
@@ -16,6 +17,35 @@ from gdpr_erasure_kit.io import (
     unescape_cell,
     valid_contact,
 )
+
+
+@pytest.mark.parametrize(
+    "path",
+    [Path("output") / "ä 東京.csv", PureWindowsPath(r"C:\work\output\input.csv")],
+)
+def test_input_error_preserves_printable_path(path):
+    assert str(InputError(path, 2, "Invalid input.")) == f"{path}: row 2: Invalid input."
+
+
+@pytest.mark.parametrize(
+    "character,escaped",
+    [
+        ("\x1b", r"\x1b"),
+        ("\n", r"\n"),
+        ("\r", r"\r"),
+        ("\t", r"\t"),
+        ("\x7f", r"\x7f"),
+        ("\x9b", r"\x9b"),
+        ("\u202e", r"\u202e"),
+        ("\udcff", r"\udcff"),
+        ("\U000e0001", r"\U000e0001"),
+    ],
+)
+def test_input_error_escapes_nonprintable_path_characters(character, escaped):
+    path = Path(f"input{character}.csv")
+    assert (
+        str(InputError(path, 2, "Invalid input.")) == f"input{escaped}.csv: row 2: Invalid input."
+    )
 
 
 @pytest.mark.parametrize("prefix", ["=", "+", "-", "@", "\t", "\r"])

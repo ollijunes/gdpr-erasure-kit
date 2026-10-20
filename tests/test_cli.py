@@ -29,6 +29,29 @@ def draft_args(tmp_path):
     ]
 
 
+@pytest.mark.parametrize(
+    "name,display",
+    [
+        ("ä 東京", "ä 東京"),
+        (r"C:\work\output", r"C:\work\output"),
+        ("output\x1b[31m\n\u202e", r"output\x1b[31m\n\u202e"),
+    ],
+)
+def test_draft_summary_formats_path_safely(tmp_path, capsys, name, display):
+    args = draft_args(tmp_path)
+    args[6] = name
+    with (
+        patch("gdpr_erasure_kit.cli.prepare_output"),
+        patch("gdpr_erasure_kit.cli.exclusive_file", side_effect=lambda path: io.StringIO()),
+    ):
+        assert main(args) == 0
+    result = capsys.readouterr()
+    assert result.out == (
+        f"Created 5 drafts and 1 tracker in {display}. Rows left as draft (not marked sent).\n"
+    )
+    assert result.err == ""
+
+
 def test_example_end_to_end(tmp_path, capsys):
     assert main(draft_args(tmp_path) + ["--date", "2026-10-20", "--mark-sent"]) == 0
     output = tmp_path / "output"
@@ -41,6 +64,7 @@ def test_example_end_to_end(tmp_path, capsys):
     assert all(row["sent_on"] == "2026-10-20" and row["deadline"] == "2026-11-20" for row in rows)
     captured = capsys.readouterr()
     assert "5 drafts and 1 tracker" in captured.out
+    assert f"in {output}. Rows" in captured.out
     assert "Rows marked sent." in captured.out
     assert "Alex Example" not in captured.out and "alex@example.com" not in captured.out
     assert not captured.err

@@ -41,6 +41,7 @@ ALLOWED_EMAIL_DOMAINS = {
     b"users.noreply.github.com",
     b"anthropic.com",
 }
+ALLOWED_EMAIL_ADDRESSES = {b"noreply@github.com"}
 
 
 def git(*args):
@@ -50,7 +51,8 @@ def git(*args):
 def detect(data):
     findings = [name for name, pattern in PATTERNS.items() if pattern.search(data)]
     if any(
-        match[1].lower() not in ALLOWED_EMAIL_DOMAINS
+        match[0].lower() not in ALLOWED_EMAIL_ADDRESSES
+        and match[1].lower() not in ALLOWED_EMAIL_DOMAINS
         and not match[1].lower().endswith((b".invalid", b".example", b".test"))
         for match in EMAIL.finditer(data)
     ):
@@ -93,6 +95,7 @@ def self_test():
         cases.append((sep.join(parts), "personal home directory"))
     for domain in ("unapproved" + ".com", "example.com" + ".unapproved"):
         cases.append(("@".join(("synthetic", domain)), "non-example email address"))
+    cases.append(("@".join(("someone", "github.com")), "non-example email address"))
     number = "".join(("01", "01", "00", "123"))
     check = chr(CHECK_CHARACTERS[int(number) % 31])
     for separator in "-+ABCDEFYXWVU":
@@ -122,6 +125,7 @@ def self_test():
         if not private_path(name):
             raise RuntimeError("Privacy detector missed a private filename canary.")
     permitted = [b"https://service.example.invalid"]
+    permitted.append(b"GitHub <noreply@github.com>")
     permitted.extend(b"synthetic@" + domain for domain in ALLOWED_EMAIL_DOMAINS)
     permitted.extend(b"synthetic@service." + suffix for suffix in (b"invalid", b"example", b"test"))
     wrong_check = "0" if check != "0" else "1"

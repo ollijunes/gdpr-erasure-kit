@@ -18,7 +18,14 @@ LANGUAGES = ("en", "fi")
 
 class InputError(ValueError):
     def __init__(self, path: Path, row: int, reason: str):
-        super().__init__(f"{str(path)!r}: row {row}: {reason}")
+        super().__init__(f"{format_path(path)}: row {row}: {reason}")
+
+
+def format_path(path: Path) -> str:
+    return "".join(
+        char if char.isprintable() else char.encode("unicode_escape").decode("ascii")
+        for char in str(path)
+    )
 
 
 def has_controls(value: str, *, multiline: bool = False) -> bool:
