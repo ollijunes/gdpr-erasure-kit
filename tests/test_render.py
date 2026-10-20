@@ -41,7 +41,7 @@ def test_substitution_is_single_pass(identity, service):
 def test_unknown_placeholder_fails(identity, service):
     with patch("gdpr_erasure_kit.render.files") as resource:
         resource.return_value.joinpath.return_value.read_text.return_value = "${unknown}"
-        with pytest.raises(KeyError):
+        with pytest.raises(InputError, match="Invalid packaged template"):
             render_request(identity, service, date(2026, 10, 20))
 
 

@@ -15,9 +15,10 @@ Please do the following:
    particular points (a) and (b): the data is no longer necessary for the
    purposes for which you collected it, and I withdraw any consent I have
    given (Article 7(3)).
-2. Where you process my data on the basis of legitimate interests, I object
-   to that processing under Article 21(1). I also object to direct marketing
-   under Article 21(2).
+2. I object to direct marketing under Article 21(2). Where you process my
+   data on the basis of legitimate interests, I also object under
+   Article 21(1), on grounds relating to my particular situation:
+   [say briefly why, or delete this sentence].
 3. Close my account, if I have one, and stop all marketing to me.
 4. Tell every recipient to whom you have disclosed my data about this
    erasure, and tell me who those recipients are (Article 19).
@@ -29,8 +30,9 @@ Please do the following:
 
 Article 12(3) requires you to reply without undue delay and in any event
 within one month of receiving this request. If this message reaches you
-today, the deadline is ${deadline}. If you need an extension, tell me within
-that month and explain why.
+today, the deadline is ${deadline}, or the next working day if that is a
+public holiday. If you need an extension, tell me within that month and
+explain why.
 
 If you need to confirm my identity, ask only for the information necessary
 for that purpose (Article 12(6)). I do not expect to send a copy of an

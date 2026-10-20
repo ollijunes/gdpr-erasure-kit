@@ -86,10 +86,9 @@ def read_csv(
                     continue
                 if len(values) != len(header):
                     raise InputError(path, row_number, "Incorrect number of CSV fields.")
-                decoded = [unescape_cell(value) for value in values]
-                if any(has_controls(value) for value in decoded):
+                if any(has_controls(value) for value in values):
                     raise InputError(path, row_number, "Control characters are not allowed.")
-                rows.append((row_number, dict(zip(header, decoded, strict=True))))
+                rows.append((row_number, dict(zip(header, values, strict=True))))
     except (OSError, UnicodeError, csv.Error) as exc:
         raise InputError(path, row_number, "Cannot read valid UTF-8 CSV.") from exc
     return rows
@@ -161,6 +160,10 @@ def prepare_output(path: Path) -> None:
         if path.is_symlink():
             raise InputError(path, 1, "Output directory must not be a symbolic link.")
         path.mkdir(mode=0o700, parents=True, exist_ok=True)
+        if os.name == "posix":
+            if path.stat().st_uid != os.getuid():
+                raise InputError(path, 1, "Output directory must be owned by the current user.")
+            path.chmod(0o700)
         if any(path.iterdir()):
             raise InputError(path, 1, "Output directory is not empty.")
     except OSError as exc:

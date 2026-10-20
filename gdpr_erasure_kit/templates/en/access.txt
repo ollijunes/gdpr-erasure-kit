@@ -26,13 +26,17 @@ send me:
 7. Whether you use automated decision-making, including profiling, as
    described in Article 22. If you do, meaningful information about the
    logic involved and the significance and envisaged consequences for me.
+8. Confirmation of my rights to rectification, erasure, restriction and
+   objection, and of my right to lodge a complaint with a supervisory
+   authority (Article 15(1)(e) and (f)).
 
 The first copy is free of charge (Article 15(3)).
 
 Article 12(3) requires you to reply without undue delay and in any event
 within one month of receiving this request. If this message reaches you
-today, the deadline is ${deadline}. If you need an extension, tell me within
-that month and explain why.
+today, the deadline is ${deadline}, or the next working day if that is a
+public holiday. If you need an extension, tell me within that month and
+explain why.
 
 If you need to confirm my identity, ask only for the information necessary
 for that purpose (Article 12(6)). I do not expect to send a copy of an

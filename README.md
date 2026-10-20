@@ -185,7 +185,9 @@ is registered to your account is often enough. The templates say so.
 Can I ask for access first and erasure later?
 Yes. An access request shows what a service holds, and an erasure request
 can then remove it. Use `--type access` first, and a second run with
-`--type erasure` and a new output folder later.
+`--type erasure` and a new output folder later. A `request_type` set on a row
+of `services.csv` wins over `--type`, so clear those cells before the second
+run.
 
 What if the service does not answer?
 Follow up once in writing, then complain to a supervisory authority. In

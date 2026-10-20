@@ -95,9 +95,9 @@ def test_missing_csv(tmp_path):
         read_services(tmp_path / "missing.csv")
 
 
-def test_unescaped_formula_read(services_file):
+def test_service_values_are_not_unescaped(services_file):
     path = services_file([["'=Example", "privacy@example.org"]])
-    assert read_services(path)[0]["service"] == "=Example"
+    assert read_services(path)[0]["service"] == "'=Example"
 
 
 @pytest.mark.parametrize(
@@ -180,11 +180,36 @@ def test_exclusive_create_and_private_modes(tmp_path):
 
 
 def test_empty_existing_output_and_non_directory(tmp_path):
+    tmp_path.chmod(0o755)
     prepare_output(tmp_path)
+    if os.name != "nt":
+        assert tmp_path.stat().st_mode & 0o777 == 0o700
     path = tmp_path / "file"
     path.write_text("original")
     with pytest.raises(InputError):
         prepare_output(path)
+
+
+@pytest.mark.skipif(os.name != "posix", reason="POSIX ownership and permissions.")
+def test_output_owned_by_another_user_is_refused(tmp_path):
+    tmp_path.chmod(0o755)
+    with patch("gdpr_erasure_kit.io.os.getuid", return_value=tmp_path.stat().st_uid + 1):
+        with pytest.raises(InputError, match="owned by the current user"):
+            prepare_output(tmp_path)
+    assert tmp_path.stat().st_mode & 0o777 == 0o755
+    assert list(tmp_path.iterdir()) == []
+
+
+@pytest.mark.skipif(os.name != "posix", reason="POSIX umask and permissions.")
+def test_new_output_mode_is_independent_of_umask(tmp_path):
+    directory = tmp_path / "output"
+    previous = os.umask(0o777)
+    try:
+        prepare_output(directory)
+        assert directory.stat().st_mode & 0o777 == 0o700
+    finally:
+        os.umask(previous)
+        directory.chmod(0o700)
 
 
 @pytest.mark.skipif(os.name == "nt", reason="Symlinks may need extra Windows privileges.")

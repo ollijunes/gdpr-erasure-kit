@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import TextIO
 
 from .dates import parse_date, schedule
-from .io import InputError, escape_cell, read_csv, validate_service
+from .io import InputError, escape_cell, read_csv, unescape_cell, validate_service
 
 COLUMNS = (
     "service",
@@ -60,6 +60,7 @@ def write_tracker(target: TextIO, rows: list[dict[str, str]]) -> None:
 def due_actions(path: Path, today: date) -> list[tuple[str, str, str, date]]:
     actions = []
     for number, row in read_csv(path, COLUMNS, COLUMNS):
+        row = {key: unescape_cell(value) for key, value in row.items()}
         validate_service(row, path, number)
         status = row["status"]
         if status not in STATUSES:

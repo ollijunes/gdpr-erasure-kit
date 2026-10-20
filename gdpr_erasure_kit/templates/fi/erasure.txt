@@ -15,9 +15,10 @@ Pyydän teitä
    17 artiklan 1 kohta, erityisesti sen a ja b alakohta: tiedot eivät ole
    enää tarpeen niihin tarkoituksiin, joita varten ne kerättiin, ja peruutan
    kaikki antamani suostumukset (7 artiklan 3 kohta).
-2. lopettamaan oikeutettuun etuun perustuvan käsittelyn. Vastustan sitä
-   21 artiklan 1 kohdan nojalla. Vastustan myös suoramarkkinointia
-   21 artiklan 2 kohdan nojalla.
+2. lopettamaan suoramarkkinoinnin, jota vastustan 21 artiklan 2 kohdan
+   nojalla. Vastustan myös oikeutettuun etuun perustuvaa käsittelyä
+   21 artiklan 1 kohdan nojalla erityiseen tilanteeseeni liittyvästä syystä:
+   [kerro syy lyhyesti tai poista tämä virke].
 3. sulkemaan käyttäjätilini, jos minulla on sellainen, ja lopettamaan kaiken
    minuun kohdistuvan markkinoinnin.
 4. ilmoittamaan poistosta kaikille, joille olette luovuttaneet tietojani, ja
@@ -32,8 +33,8 @@ Pyydän teitä
 Asetuksen 12 artiklan 3 kohdan mukaan teidän on vastattava ilman
 aiheetonta viivytystä ja viimeistään kuukauden kuluessa pyynnön
 vastaanottamisesta. Jos saatte tämän viestin tänään, määräaika päättyy
-${deadline}. Jos tarvitsette lisäaikaa, kertokaa siitä ja sen syistä tämän
-kuukauden kuluessa.
+${deadline} tai seuraavana arkipäivänä, jos se on arkipyhä. Jos tarvitsette
+lisäaikaa, kertokaa siitä ja sen syistä tämän kuukauden kuluessa.
 
 Jos teidän on varmistettava henkilöllisyyteni, pyytäkää vain siihen
 tarvittavat tiedot (12 artiklan 6 kohta). En oleta lähettäväni kopiota

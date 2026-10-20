@@ -38,7 +38,9 @@ month and explain why. The EDPB says extensions are an exception, not routine.
 
 When a controller extends, set the row's status to `extended`. The kit then
 counts three months from receipt, with the same end-of-month and weekend
-rules.
+rules. If the same controller later asks you to confirm your identity, keep
+the status `extended` and fill in `identity_sent_on` when you have answered;
+the three months then count from that date.
 
 ## When the controller asks who you are
 

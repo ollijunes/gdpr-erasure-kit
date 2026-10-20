@@ -5,7 +5,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from .dates import deadline, parse_date
+from .dates import DateRangeError, deadline, parse_date
 from .io import InputError, exclusive_file, prepare_output, read_identity, read_services
 from .render import render_request, slug
 from .tracker import draft_row, due_actions, write_tracker
@@ -80,6 +80,10 @@ def draft(args: argparse.Namespace) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if callable(reconfigure):
+            reconfigure(errors="backslashreplace")
     args = parser().parse_args(argv)
     try:
         if args.command == "draft":
@@ -100,7 +104,7 @@ def main(argv: list[str] | None = None) -> int:
     except InputError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
-    except (ValueError, OverflowError, KeyError):
-        print("Error: date out of range or invalid packaged template.", file=sys.stderr)
+    except DateRangeError:
+        print("Error: date out of range.", file=sys.stderr)
         return 1
     return 0

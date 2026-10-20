@@ -1,7 +1,8 @@
 # Tracking requests in Google Sheets
 
-You can track requests in a spreadsheet without the command line. The same
-formulas work in LibreOffice Calc and Excel.
+You can track requests in a spreadsheet without the command line. The date
+formulas also work in LibreOffice Calc and Excel; the highlighting rules are
+written for Google Sheets.
 
 ## Set up the sheet
 
@@ -43,32 +44,36 @@ Monday.
 `G2`, deadline:
 
 ```text
-=IF(F2="", "", WORKDAY(EDATE(IF(K2="", F2, K2), 1) - 1, 1))
+=IF(OR(F2="", AND(E2="identity_requested", K2="")), "", WORKDAY(EDATE(IF(K2="", F2, K2), 1) - 1, 1))
 ```
 
 `L2`, extended deadline (three months from the start date):
 
 ```text
-=IF(F2="", "", WORKDAY(EDATE(IF(K2="", F2, K2), 3) - 1, 1))
+=IF(OR(F2="", AND(E2="identity_requested", K2="")), "", WORKDAY(EDATE(IF(K2="", F2, K2), 3) - 1, 1))
 ```
 
 `H2`, reminder five days before the deadline in force:
 
 ```text
-=IF(F2="", "", IF(E2="extended", L2, G2) - 5)
+=IF(G2="", "", IF(E2="extended", L2, G2) - 5)
 ```
 
 `I2`, follow-up the day after:
 
 ```text
-=IF(F2="", "", IF(E2="extended", L2, G2) + 1)
+=IF(G2="", "", IF(E2="extended", L2, G2) + 1)
 ```
 
 `J2`, escalation 14 days after:
 
 ```text
-=IF(F2="", "", IF(E2="extended", L2, G2) + 14)
+=IF(G2="", "", IF(E2="extended", L2, G2) + 14)
 ```
+
+While the controller waits for your identity reply (`identity_requested`
+with an empty `identity_sent_on`), the dates stay blank, because the clock is
+suspended. They come back when you fill in `identity_sent_on`.
 
 `EDATE` adds calendar months and stops at the end of a shorter month.
 `WORKDAY(date - 1, 1)` returns the same date on a weekday and the next Monday
@@ -82,12 +87,9 @@ Custom formula:
 
 | Rule | Custom formula | Suggested colour |
 | --- | --- | --- |
-| Reminder due | `=AND($H2<>"", TODAY()>=$H2, TODAY()<$I2, NOT(REGEXMATCH($E2, "completed\|refused\|escalated")))` | Light yellow |
-| Deadline passed | `=AND($I2<>"", TODAY()>=$I2, TODAY()<$J2, NOT(REGEXMATCH($E2, "completed\|refused\|escalated")))` | Light orange |
-| Time to escalate | `=AND($J2<>"", TODAY()>=$J2, NOT(REGEXMATCH($E2, "completed\|refused\|escalated")))` | Light red |
-
-In the formulas, type `|` without the backslash. The backslash is only there
-so the table renders on GitHub.
+| Reminder due | `=AND($H2<>"", TODAY()>=$H2, TODAY()<$I2, $E2<>"completed", $E2<>"refused", $E2<>"escalated")` | Light yellow |
+| Deadline passed | `=AND($I2<>"", TODAY()>=$I2, TODAY()<$J2, $E2<>"completed", $E2<>"refused", $E2<>"escalated")` | Light orange |
+| Time to escalate | `=AND($J2<>"", TODAY()>=$J2, $E2<>"completed", $E2<>"refused", $E2<>"escalated")` | Light red |
 
 ## Statuses
 

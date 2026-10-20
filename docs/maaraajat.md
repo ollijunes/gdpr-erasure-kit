@@ -40,7 +40,9 @@ tavallinen käytäntö.
 
 Kun rekisterinpitäjä ottaa lisäaikaa, merkitse riville tila `extended`.
 Työkalu laskee silloin kolme kuukautta pyynnön saapumisesta samoilla kuun
-lopun ja viikonlopun säännöillä.
+lopun ja viikonlopun säännöillä. Jos sama rekisterinpitäjä kysyy myöhemmin
+henkilöllisyyttäsi, pidä tila `extended` ja täytä `identity_sent_on`, kun
+olet vastannut. Kolme kuukautta lasketaan silloin siitä päivästä.
 
 ## Kun rekisterinpitäjä kysyy henkilöllisyyttäsi
 

@@ -55,15 +55,19 @@ def render_request(identity: dict, service: dict, request_date: date) -> str:
     if language not in LABELS or kind not in {"erasure", "access"}:
         raise ValueError("Unsupported template.")
     template = files("gdpr_erasure_kit").joinpath("templates", language, f"{kind}.txt")
+    path = Path("gdpr_erasure_kit/templates") / language / f"{kind}.txt"
     try:
         content = template.read_text(encoding="utf-8")
     except (OSError, UnicodeError) as exc:
-        path = Path("gdpr_erasure_kit/templates") / language / f"{kind}.txt"
         raise InputError(path, 1, "Cannot read packaged template.") from exc
-    return Template(content).substitute(
+    substitutions = dict(
         service_name=service["service"],
         date=localized(request_date, language),
         identifiers=identifiers(identity, service.get("account_identifier", ""), language),
         deadline=localized(deadline(request_date), language),
         full_name=identity["full_name"],
     )
+    try:
+        return Template(content).substitute(substitutions)
+    except (ValueError, KeyError) as exc:
+        raise InputError(path, 1, "Invalid packaged template.") from exc

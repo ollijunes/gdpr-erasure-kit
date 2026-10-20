@@ -28,14 +28,17 @@ toimittakaa minulle
    päätöksentekoa, profilointi mukaan lukien. Jos käytätte, kertokaa
    merkitykselliset tiedot käsittelyn logiikasta sekä sen merkityksestä ja
    todennäköisistä seurauksista minulle.
+8. tieto oikeudestani pyytää tietojen oikaisemista, poistamista ja käsittelyn
+   rajoittamista sekä vastustaa käsittelyä, ja oikeudestani tehdä valitus
+   valvontaviranomaiselle (15 artiklan 1 kohdan e ja f alakohta).
 
 Ensimmäinen jäljennös on maksuton (15 artiklan 3 kohta).
 
 Asetuksen 12 artiklan 3 kohdan mukaan teidän on vastattava ilman
 aiheetonta viivytystä ja viimeistään kuukauden kuluessa pyynnön
 vastaanottamisesta. Jos saatte tämän viestin tänään, määräaika päättyy
-${deadline}. Jos tarvitsette lisäaikaa, kertokaa siitä ja sen syistä tämän
-kuukauden kuluessa.
+${deadline} tai seuraavana arkipäivänä, jos se on arkipyhä. Jos tarvitsette
+lisäaikaa, kertokaa siitä ja sen syistä tämän kuukauden kuluessa.
 
 Jos teidän on varmistettava henkilöllisyyteni, pyytäkää vain siihen
 tarvittavat tiedot (12 artiklan 6 kohta). En oleta lähettäväni kopiota

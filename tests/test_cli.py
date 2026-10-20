@@ -1,4 +1,5 @@
 import csv
+import io
 import os
 import runpy
 import socket
@@ -172,14 +173,91 @@ def test_invalid_cli_date_is_redacted(capsys, arguments):
 
 def test_out_of_range_date(capsys):
     assert main(["deadline", "--received", "9999-12-31"]) == 1
-    assert "out of range" in capsys.readouterr().err
+    assert capsys.readouterr().err == "Error: date out of range.\n"
 
 
-def test_template_failure_writes_nothing(tmp_path, capsys):
-    with patch("gdpr_erasure_kit.cli.render_request", side_effect=KeyError("PRIVATE_CELL")):
+@pytest.mark.parametrize("day", ["9999-12-31", "9999-11-20"])
+def test_out_of_range_draft_date_writes_nothing(tmp_path, capsys, day):
+    assert main(draft_args(tmp_path) + ["--date", day, "--mark-sent"]) == 1
+    assert capsys.readouterr().err == "Error: date out of range.\n"
+    assert not (tmp_path / "output").exists()
+
+
+@pytest.mark.parametrize("content", ["${PRIVATE_CELL}", "${"])
+def test_template_failure_writes_nothing(tmp_path, capsys, content):
+    with patch("gdpr_erasure_kit.render.files") as resource:
+        resource.return_value.joinpath.return_value.read_text.return_value = content
         assert main(draft_args(tmp_path)) == 1
     assert not (tmp_path / "output").exists()
-    assert "PRIVATE_CELL" not in capsys.readouterr().err
+    error = capsys.readouterr().err
+    assert "Invalid packaged template." in error
+    assert "PRIVATE_CELL" not in error and "date" not in error
+
+
+@pytest.mark.parametrize("exception", [ValueError, KeyError])
+def test_unexpected_errors_are_not_misreported(tmp_path, capsys, exception):
+    with patch("gdpr_erasure_kit.cli.draft", side_effect=exception("unexpected")):
+        with pytest.raises(exception):
+            main(draft_args(tmp_path))
+    assert capsys.readouterr().err == ""
+
+
+def test_account_identifier_keeps_leading_quote(tmp_path, services_file):
+    services = services_file(
+        [["Example", "privacy@example.org", "'-account"]],
+        ("service", "contact", "account_identifier"),
+    )
+    args = draft_args(tmp_path)
+    args[2] = str(services)
+    assert main(args) == 0
+    letter = (tmp_path / "output/01-example-erasure-en.txt").read_text(encoding="utf-8")
+    assert "Account or username at your service: '-account\n" in letter
+
+
+@pytest.mark.parametrize("command", ["draft", "due"])
+def test_commands_with_cp1252_stdout(tmp_path, services_file, monkeypatch, capsys, command):
+    services = services_file([["東京", "privacy@example.org"]])
+    output = tmp_path / "東京"
+    args = draft_args(tmp_path)
+    args[2] = str(services)
+    args[6] = str(output)
+    args += ["--date", "2026-10-20", "--mark-sent"]
+    if command == "due":
+        assert main(args) == 0
+        args = ["due", "--tracker", str(output / "tracker.csv"), "--today", "2026-11-21"]
+    with io.TextIOWrapper(io.BytesIO(), encoding="cp1252", errors="strict") as stdout:
+        monkeypatch.setattr(sys, "stdout", stdout)
+        assert main(args) == 0
+        stdout.flush()
+        text = stdout.buffer.getvalue().decode("cp1252")
+        assert r"\u6771\u4eac" in text
+        if command == "draft":
+            assert "Created 1 drafts" in text
+        else:
+            assert r"\u6771\u4eac | sent | follow up | 2026-11-21" in text
+        assert stdout.encoding == "cp1252" and stdout.errors == "backslashreplace"
+    assert "東京" in (output / "01-service-erasure-en.txt").read_text(encoding="utf-8")
+    assert capsys.readouterr().err == ""
+
+
+def test_cp1252_stderr_is_configured_before_argument_parsing(monkeypatch):
+    with io.TextIOWrapper(io.BytesIO(), encoding="cp1252", errors="strict") as stderr:
+        monkeypatch.setattr(sys, "stderr", stderr)
+        with pytest.raises(SystemExit) as failure:
+            main(["東京"])
+        assert failure.value.code == 1
+        stderr.flush()
+        assert r"\u6771\u4eac" in stderr.buffer.getvalue().decode("cp1252")
+        assert stderr.encoding == "cp1252" and stderr.errors == "backslashreplace"
+
+
+def test_streams_without_reconfigure(monkeypatch):
+    stdout, stderr = io.StringIO(), io.StringIO()
+    monkeypatch.setattr(sys, "stdout", stdout)
+    monkeypatch.setattr(sys, "stderr", stderr)
+    assert main(["deadline", "--received", "2026-10-20"]) == 0
+    assert "2026-11-20" in stdout.getvalue()
+    assert stderr.getvalue() == ""
 
 
 def test_io_error_is_redacted(tmp_path, capsys):
