@@ -21,6 +21,8 @@ yourself.
 [Google Sheets](docs/google-sheets.md) · [Security](SECURITY.md) ·
 [Contributing](CONTRIBUTING.md) · [ollijunes.com](https://ollijunes.com)
 
+Read the story behind it: [in English](https://ollijunes.com/gdpr-erasure-kit-data-deletion-requests/) · [suomeksi](https://ollijunes.com/fi/gdpr-poistopyynto-pohja/).
+
 ```mermaid
 flowchart LR
     List[services.csv] --> Kit[gdpr-kit draft]
